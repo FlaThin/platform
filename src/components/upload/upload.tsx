@@ -46,52 +46,37 @@ const UploadMediaComponent: React.FC = () => {
     };
 
     return (
-        <div className='w-full h-full flex justify-center gap-6 pb-3'>
-            <div className='w-full h-full flex flex-col justify-center bg-[#FBFBFB] rounded-3xl'>
+        <div className='w-full h-full grid grid-cols-3 grid-rows-4 justify-center gap-6'>
+            <div className='w-full h-full row-span-4 flex flex-col justify-center bg-[#FBFBFB] rounded-3xl'>
 
             </div>
 
-            <div className='w-full h-full flex flex-col justify-center gap-6'>
+            <div className='w-full h-full row-span-3 flex flex-col justify-center gap-6'>
                 <div className='w-full flex flex-col flex-1 bg-[#FBFBFB] rounded-3xl p-6 gap-3'>
                     <DropZone handleFileChange={handleFileChange} />
                     <p className='font-semibold text-xs text-[#6B7E90] mb-3'>Max files sizes: 10GB</p>
 
-                    <div className="flex flex-col max-h-48 w-full overflow-y-auto gap-2">
+                    <div className="flex flex-col flex-1 w-full overflow-y-auto gap-2">
                         <FileItem selectedFiles={selectedFiles} uploadProgress={uploadProgress} />
                     </div>
                 </div>
+            </div>
 
-                <div className='bg-[#FBFBFB] rounded-3xl h-fit w-full flex flex-col p-6 gap-4'>
-                    <div className='bg-[#EFEFEF] border-2 rounded-lg w-full min-h-16 flex items-center justify-center'>
-                        <h1 className=''></h1>
-                    </div>
-                    <div className='w-full min-h-11'>
-                        <div>
-                            <h3 className='font-bold'>Ready to Delete</h3>
-                            <p className='font-semibold text-base text-[#6B7E90]'>Up to 46 GB</p>
-                        </div>
+            <div className='bg-[#FBFBFB] rounded-3xl col-start-2 row-span-1 w-full flex flex-col p-6 gap-4'>
+                <div className='bg-[#EFEFEF] border-2 rounded-lg w-full min-h-16 flex items-center justify-center'>
+                    <h1 className=''></h1>
+                </div>
+                <div className='w-full min-h-11'>
+                    <div>
+                        <h3 className='font-bold'>Ready to Delete</h3>
+                        <p className='font-semibold text-base text-[#6B7E90]'>Up to 46 GB</p>
                     </div>
                 </div>
             </div>
 
-            <div className='w-full h-full flex flex-col justify-center bg-[#FBFBFB] rounded-3xl'>
+            <div className='flex flex-col row-start-1 col-start-3 row-span-4 justify-center bg-[#FBFBFB] rounded-3xl'>
 
             </div>
-
-
-
-            {
-                /*
-            <div className='flex flex-1 flex-col items-center w-11/12 max-w-sm bg-white rounded-3xl p-6 gap-8'>
-                            <DropZone handleFileChange={handleFileChange} />
-                        
-                            <div className="flex flex-1 flex-col w-full max-h-96 space-y-4 overflow-y-auto">
-                                <FileItem selectedFiles={selectedFiles} uploadProgress={uploadProgress} />
-                            </div>
-                        </div>
-                        <div className='flex w-11/12 max-w-2xl bg-white rounded-3xl p-8'></div>
-                */
-            }
         </div>
     );
 };
