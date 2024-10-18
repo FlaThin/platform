@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from 'react';
-import { RxUpload } from "react-icons/rx";
 import { uploadMedia } from '../../use-cases/use-upload/index';
-import { FileItem } from './file-item';
+import { FileItem } from './upload-components/file-item';
+import { DropZone } from './upload-components/dropzone';
 
 const UploadMediaComponent: React.FC = () => {
     const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
@@ -13,21 +13,23 @@ const UploadMediaComponent: React.FC = () => {
     const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
 
-        if (!files) return setUploadStatus('Falha no upload.');
-        
+        if (!files) return setUploadStatus('No files selected.');
+
         const filesArray = Array.from(files);
 
-        for (const file of filesArray) {
+        // Prevent uploading duplicate files
+        const newFiles = filesArray.filter((file) => !selectedFiles.find(f => f.name === file.name));
+
+        setSelectedFiles((prevFiles) => [...prevFiles, ...newFiles]);
+
+        for (const file of newFiles) {
             await handleUpload(file);
         }
     };
 
     const handleUpload = async (file: File) => {
-        // Immediately add the file to the selectedFiles state
-        setSelectedFiles((prev) => [...prev, file]);
-
         setUploadProgress((prev) => ({ ...prev, [file.name]: 0 }));
-        setUploadStatus('Fazendo upload...');
+        setUploadStatus('Uploading...');
 
         try {
             const result = await uploadMedia(file, (progressEvent) => {
@@ -37,47 +39,59 @@ const UploadMediaComponent: React.FC = () => {
                 }
             });
 
-            console.log('Upload result for', file.name, ':', result);
-            setUploadStatus('Upload concluído com sucesso!');
+            setUploadStatus('Upload successful!');
         } catch (error) {
-            console.error('Erro no upload:', error);
-            setUploadStatus('Falha no upload.');
+            setUploadStatus('Upload failed.');
         }
     };
 
     return (
-        <div className="w-full h-full flex items-center justify-center fixed bg-gray-800/60 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div className='w-11/12 max-w-3xl h-5/6 bg-white rounded-3xl p-8 flex flex-col items-center gap-8'>
-                <div className='w-full flex flex-col gap-3 font-medium'>
-                    <h1 className='text-black text-3xl'>Meus Spots</h1>
-                    <p className='text-gray-500'>Upload and attach files to this project</p>
-                </div>
+        <div className='w-full h-full flex justify-center gap-6 pb-3'>
+            <div className='w-full h-full flex flex-col justify-center bg-[#FBFBFB] rounded-3xl'>
 
-                <div className="file-upload-container w-full">
-                    <div className="flex flex-col border-2 h-52 border-dashed border-black rounded-2xl text-center transition-colors duration-300 ease-in-out hover:bg-zinc-100">
-                        <input
-                            className="file-input hidden"
-                            id="fileInput"
-                            type="file"
-                            multiple
-                            onChange={handleFileChange}
-                        />
-                        <label htmlFor='fileInput' className="flex flex-col items-center justify-center w-full h-full file-label cursor-pointer p-10">
-                            <RxUpload className="upload-icon text-5xl text-black mb-2" />
-                            <p className="text-black-600 text-base">Drag &amp; Drop or click to upload</p>
-                        </label>
+            </div>
+
+            <div className='w-full h-full flex flex-col justify-center gap-6'>
+                <div className='w-full flex flex-col flex-1 bg-[#FBFBFB] rounded-3xl p-6 gap-3'>
+                    <DropZone handleFileChange={handleFileChange} />
+                    <p className='font-semibold text-xs text-[#6B7E90] mb-3'>Max files sizes: 10GB</p>
+
+                    <div className="flex flex-col max-h-48 w-full overflow-y-auto gap-2">
+                        <FileItem selectedFiles={selectedFiles} uploadProgress={uploadProgress} />
                     </div>
                 </div>
 
-                <div className="flex flex-1 flex-col w-full space-y-4 overflow-y-auto">
-                    <FileItem selectedFiles={selectedFiles} uploadProgress={uploadProgress} />
-                </div>
-
-                <div className='flex items-center h-20 w-full gap-4'>
-                    <button className='w-full h-full bg-white border-2 border-gray rounded-2xl'>Cancel</button>
-                    <button className='w-full h-full bg-black rounded-2xl text-white'>Save</button>
+                <div className='bg-[#FBFBFB] rounded-3xl h-fit w-full flex flex-col p-6 gap-4'>
+                    <div className='bg-[#EFEFEF] border-2 rounded-lg w-full min-h-16 flex items-center justify-center'>
+                        <h1 className=''></h1>
+                    </div>
+                    <div className='w-full min-h-11'>
+                        <div>
+                            <h3 className='font-bold'>Ready to Delete</h3>
+                            <p className='font-semibold text-base text-[#6B7E90]'>Up to 46 GB</p>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <div className='w-full h-full flex flex-col justify-center bg-[#FBFBFB] rounded-3xl'>
+
+            </div>
+
+
+
+            {
+                /*
+            <div className='flex flex-1 flex-col items-center w-11/12 max-w-sm bg-white rounded-3xl p-6 gap-8'>
+                            <DropZone handleFileChange={handleFileChange} />
+                        
+                            <div className="flex flex-1 flex-col w-full max-h-96 space-y-4 overflow-y-auto">
+                                <FileItem selectedFiles={selectedFiles} uploadProgress={uploadProgress} />
+                            </div>
+                        </div>
+                        <div className='flex w-11/12 max-w-2xl bg-white rounded-3xl p-8'></div>
+                */
+            }
         </div>
     );
 };
