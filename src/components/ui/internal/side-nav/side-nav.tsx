@@ -14,8 +14,6 @@ export function SideNav() {
                 <Image src={gostosao} alt="gay" width={48} height={48} />
             </div>
 
-            {/*flex justify-between py-4 items-center w-full h-fit relative*/}
-
             <div className="flex flex-col flex-1 items-center justify-center gap-3">
                 <NavItem factorIcon={() => <PiHouseSimpleLight />} />
                 <NavItem factorIcon={() => <GrAppsRounded />} />

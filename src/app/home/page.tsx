@@ -1,5 +1,7 @@
+import UploadMediaComponent from "@/components/upload/upload";
+
 export default function Home() {
-    return(
-        <h1>Home</h1>
+    return (
+        <UploadMediaComponent />
     )
 }
