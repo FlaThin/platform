@@ -100,3 +100,12 @@
   background: #555; /* Color of the scrollbar thumb when hovered */
 }
 
+@media (max-height: 800px) {
+  .responsive-text h3 {
+    font-size: 1rem; /* Diminui o tamanho da letra para o título */
+  }
+
+  .responsive-text p {
+    font-size: 0.875rem; /* Diminui o tamanho da letra para o parágrafo */
+  }
+}
