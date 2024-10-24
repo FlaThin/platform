@@ -17,6 +17,8 @@ import {
   DropdownMenuRadioItem
 } from "../../dropdown-menu";
 import { useState } from "react";
+import { Dialog, DialogContent, DialogTrigger } from "../../dialog";
+import { Separator } from "../../separator";
 
 export function Profile() {
 
@@ -30,7 +32,10 @@ export function Profile() {
       <DropdownMenuContent align="end" sideOffset={8} className="rounded-xl pb-2">
         <DropdownMenuLabel>Astolfo Jose</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Account</DropdownMenuItem>
+
+        <DropdownMenuItem>
+          Account
+        </DropdownMenuItem>
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>Language</DropdownMenuSubTrigger>
           <DropdownMenuPortal>
@@ -54,7 +59,6 @@ export function Profile() {
         </DropdownMenuSub>
         <DropdownMenuItem>Notifications</DropdownMenuItem>
       </DropdownMenuContent>
-
     </DropdownMenu>
   )
 }
