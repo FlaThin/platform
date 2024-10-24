@@ -1,9 +1,7 @@
-import Image from "next/image";
 import { Header } from "../../header";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 import { GrAppsRounded } from "react-icons/gr";
-import { RiSearchLine } from "react-icons/ri";
 import { Profile } from "./profile";
 import { SlideInput } from "./slide-input";
 
