@@ -68,8 +68,8 @@ const UploadMediaComponent: React.FC = () => {
                 <div className='bg-[#EFEFEF] border-2 rounded-lg w-full min-h-16 flex items-center justify-center'>
                     <h1 className=''></h1>
                 </div>
-                <div className='w-full h-full flex justify-between'>
-                    <div className='flex flex-col responsive-text justify-center h-full'>
+                <div className='w-full h-full flex justify-between items-center'>
+                    <div className='flex flex-1 flex-col responsive-text justify-center h-full'>
                         <p className='font-semibold text-base text-[#6B7E90]'>Up to Upload</p>
                     </div>
                     <div className='flex gap-1'>
