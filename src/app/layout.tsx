@@ -5,7 +5,6 @@ import { Content } from "@/components/ui/internal/content";
 import { HeaderSimple } from "@/components/ui/internal/header-simple";
 import { SideNav } from "@/components/ui/internal/side-nav/side-nav";
 
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

@@ -47,25 +47,7 @@ const data: Payment[] = [
       amount: 242,
       status: "success",
       title: "Abe45@gmail.com",
-    },
-    {
-      id: "derv1ws0",
-      amount: 837,
-      status: "processing",
-      title: "Monserrat44@gmail.com",
-    },
-    {
-      id: "5kma53ae",
-      amount: 874,
-      status: "success",
-      title: "Silas22@gmail.com",
-    },
-    {
-      id: "bhqecj4p",
-      amount: 721,
-      status: "failed",
-      title: "carmella@hotmail.com",
-    },
+    }
   ]
   
   export type Payment = {
